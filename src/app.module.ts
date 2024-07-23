@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { PaisesModule } from './paises/paises.module';
 import { AutosModule } from './autos/autos.module';
-import { MarcasModule } from './marcas/marcas.module';
-import { RolesModule } from './roles/roles.module';
 import { LenguajesModule } from './lenguajes/lenguajes.module';
+import { MarcasModule } from './marcas/marcas.module';
+import { PaisesModule } from './paises/paises.module';
+import { RolesModule } from './roles/roles.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -20,7 +20,7 @@ import { LenguajesModule } from './lenguajes/lenguajes.module';
       database: 'data',
       entities: ['dist/**/*.entity.{ts,js}'],
       synchronize: true,
-      //logging: true,
+      logging: true,
     }),
     UsersModule,
     PaisesModule,
