@@ -1,21 +1,18 @@
 import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('users')
-export class Users {
+@Entity('paise')
+export class Paise {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('varchar')
+  @Column('text')
   nombre: string;
 
-  @Column('varchar')
-  apellido: string;
+  @Column('text')
+  provincia: string;
 
-  @Column('int')
-  dni: number;
-
-  @Column('varchar')
-  direccion: string;
+  @Column('text')
+  localidad: string;
 
   @DeleteDateColumn()
   deletedAt?: Date;

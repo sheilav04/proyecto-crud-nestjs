@@ -32,4 +32,5 @@ export class UsersService {
   //remove(id: string) {
   //  return;
   //}
+  //buscar el id findOne, y despues retornar con .softRemove(data)
 }

@@ -3,6 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
+import { PaisesModule } from './paises/paises.module';
+import { AutosModule } from './autos/autos.module';
+import { MarcasModule } from './marcas/marcas.module';
+import { RolesModule } from './roles/roles.module';
+import { LenguajesModule } from './lenguajes/lenguajes.module';
 
 @Module({
   imports: [
@@ -18,6 +23,11 @@ import { UsersModule } from './users/users.module';
       //logging: true,
     }),
     UsersModule,
+    PaisesModule,
+    AutosModule,
+    MarcasModule,
+    RolesModule,
+    LenguajesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

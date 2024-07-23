@@ -1,24 +1,21 @@
 import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('users')
-export class Users {
+@Entity('auto')
+export class Auto {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('varchar')
-  nombre: string;
+  @Column('text')
+  modelo: string;
 
-  @Column('varchar')
-  apellido: string;
+  @Column('text')
+  color: string;
 
-  @Column('int')
-  dni: number;
-
-  @Column('varchar')
-  direccion: string;
+  @Column('text')
+  patente: string;
 
   @DeleteDateColumn()
   deletedAt?: Date;
   //campo de 'creado a', 'borrado a'
-  //idLocalizacion: Pais
+  //idMarca: Marca
 }
