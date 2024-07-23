@@ -1,45 +1,35 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
-import * as fs from 'fs/promises';
-import { DATABASE_PATH } from '../common/constants/global.constants';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Users } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  async create(user: CreateUserDto) {
-    const users: CreateUserDto[] = await this.findAll();
-    users.push(user);
-    await fs.writeFile(DATABASE_PATH, JSON.stringify(users));
+  constructor(
+    @InjectRepository(Users)
+    private readonly userRepository: Repository<Users>,
+  ) {}
+
+  create(user: CreateUserDto) {
+    return this.userRepository.save(user);
   }
 
-  async findAll(): Promise<CreateUserDto[]> {
-    const data = await fs.readFile(DATABASE_PATH);
-    return JSON.parse(data.toString());
+  //retorna array
+  findAll() {
+    return this.userRepository.find();
   }
 
-  async findOne(name: string) {
-    const users = await this.findAll();
-
-    const user = users.find((user) => user.name == name);
-
-    if (!user) throw new ForbiddenException('mensaje hola');
-
-    return user;
+  findOne(id: string) {
+    return this.userRepository.findOne({ where: { id: id } });
   }
 
-  async update(name: string, user: UpdateUserDto) {
-    const users = await this.findAll();
-    const index = users.findIndex((user) => user.name == name);
-
-    users[index] = { ...users[index], ...user };
-
-    await fs.writeFile(DATABASE_PATH, JSON.stringify(users));
+  update(id: string, updateData: UpdateUserDto) {
+    return this.userRepository.update({ id: id }, updateData);
   }
 
-  async remove(name: string) {
-    const users = await this.findAll();
-    const index = users.findIndex((user) => user.name == name);
-    users.splice(index, 1);
-    await fs.writeFile(DATABASE_PATH, JSON.stringify(users));
-  }
+  //remove(id: string) {
+  //  return;
+  //}
 }

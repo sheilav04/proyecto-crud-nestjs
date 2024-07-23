@@ -1,12 +1,17 @@
-import { IsNumber, IsString, MaxLength, Min, MinLength } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
-  @MinLength(5)
-  @MaxLength(10)
-  name: string;
+  nombre: string;
+
+  @IsString()
+  apellido: string;
 
   @IsNumber()
-  @Min(18)
-  age: number;
+  dni: number;
+
+  @IsString()
+  direccion: string;
+
+  //idLocalizacion: Pais
 }
